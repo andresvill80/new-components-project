@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Phase 13 — PERT Chart
 
-Load the `extjs` and `component-workflow` skills, then follow the workflow. Requires Phase 12. Add `"charts"` to `requires` in `new-components/package.json` (and confirm the apps resolve it with `sencha app refresh`).
+Load the `extjs` and `component-workflow` skills, then follow the workflow. Requires Phase 12. Add `"charts"` to `requires` in `new-components/package.json` (then send an action request for `sencha app refresh` in both apps to confirm it resolves).
 
 ## Classes
 | Class | Where | xtype |

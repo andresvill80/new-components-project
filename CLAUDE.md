@@ -29,9 +29,26 @@ A Sencha Cmd package of custom Ext JS 8 components that work in both the **Class
 2. **One public API, two toolkits.** Our own configs, methods, and events are identical in Classic and Modern. Inherited framework configs follow each toolkit's conventions (`fieldLabel` in Classic, `label` in Modern).
 3. **Shared code stays shared.** Anything in `new-components/src/` must run in both toolkits. Never reference toolkit-only classes there.
 4. **Never guess an API.** Before using a class, config, method, or event you are not certain exists in Ext JS 8, check the SDK source (grep the SDK folders listed in the `extjs` skill). If it doesn't exist, say so and pick an alternative.
-5. **Sencha Cmd boundaries.** Never run `sencha generate ...` (the user does that). Never run `sencha app watch` (it blocks). You may run `sencha app refresh` and `sencha app build development` inside `classic/` or `modern/` to check for errors.
-6. **Git.** Work on the phase branch. Don't commit or push unless the user asks; propose a commit message instead.
-7. **Plan before code.** At the start of every component, present the public API and file list and wait for the user's approval.
+5. **Never run `git` or `sencha` commands.** The user runs every git and Sencha Cmd command themselves. When one is needed, stop and send an action request (format below), then wait for the user's reply before continuing.
+6. **Plan before code.** At the start of every component, present the public API and file list and wait for the user's approval.
+
+## Action requests
+Whenever the user needs to run a command, end your turn with a block in exactly this format, and do nothing else until they answer:
+
+```
+🖐 ACTION NEEDED
+Why: <one line: what this checks or does>
+Where: <folder, e.g. repo root, classic/, modern/>
+Run:
+  <command 1>
+  <command 2>
+Then: <what to paste back or confirm, e.g. "paste the full output" or "tell me when it's done">
+```
+
+- Group everything needed at that point into one request instead of several small ones.
+- After file changes that need a refresh or build, send the request right away rather than continuing on unverified changes.
+- When the user pastes output, read it fully; fix errors before moving on.
+- For git, propose the exact commands and a commit message; the user decides whether to run them.
 
 ## Skills
 - `extjs` — how to write Ext JS code in this project, for both toolkits. Load it before writing or reviewing any Ext JS code.
@@ -40,7 +57,7 @@ A Sencha Cmd package of custom Ext JS 8 components that work in both the **Class
 
 If a skill named `extjs-modern` is also available (synced from claude.ai), the project `extjs` skill takes precedence in this repo; its Modern-only rules do not apply to Classic code.
 
-## Commands (run inside `classic/` or `modern/`)
+## Which command to request (the user runs them inside `classic/` or `modern/`)
 - After adding, renaming, or deleting class files, or changing `requires` / `app.json` / `package.json`: `sencha app refresh`
 - After SASS or theme changes: `sencha app build development`
-- The user tests with `sencha app watch` in each app.
+- To test in the browser: `sencha app watch` (the user keeps it running while testing)

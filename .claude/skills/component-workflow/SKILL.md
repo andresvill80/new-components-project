@@ -5,13 +5,12 @@ description: The standard procedure and definition of done for building any comp
 
 # Component workflow
 
-Every component follows these steps in order. Load the `extjs` skill first.
+Every component follows these steps in order. Load the `extjs` skill first. You never run `git` or `sencha` yourself: every command goes to the user as an action request in the format defined in `CLAUDE.md`, and you wait for their reply.
 
 ## 1. Start
 1. Read `ROADMAP.md`. Confirm earlier phases this one depends on are `done`; if not, tell the user and stop.
-2. Check `git status`. If the tree is dirty, ask the user how to proceed.
-3. Ask the user to create and switch to the phase branch (or do it if they agree): `git switch -c phase/NN-slug`.
-4. Mark the phase `in progress` in `ROADMAP.md`.
+2. Send one action request asking the user to run, at the repo root, `git status` and `git switch -c phase/NN-slug` (or `git switch phase/NN-slug` if the branch exists), and to paste the output. If the tree was dirty, ask how they want to proceed before continuing.
+3. Mark the phase `in progress` in `ROADMAP.md`.
 
 ## 2. Research (no code yet)
 1. Grep the SDK to confirm Ext JS 8 doesn't already ship this component in either toolkit. Report anything close (including `packages/ux`).
@@ -49,9 +48,9 @@ Patterns:
 - Both apps demo the same scenarios so behavior can be compared side by side.
 
 ## 6. Verify
-1. Run `sencha app refresh` and `sencha app build development` in `classic/` and in `modern/`. Fix every error and warning you introduced.
-2. Re-read your code against the `extjs` skill checklist (section 10).
-3. Give the user a short **manual test checklist** for `sencha app watch` in each app. Wait for their results and fix what they report.
+1. Re-read your code against the `extjs` skill checklist (section 10).
+2. Send one action request for both apps: `sencha app refresh` then `sencha app build development` in `classic/` and in `modern/`, asking the user to paste the output (or at least every error and warning). Fix what you introduced and repeat until both builds are clean.
+3. Give the user a short **manual test checklist** to follow with `sencha app watch` running in each app. Wait for their results and fix what they report.
 
 ## 7. Document
 - `new-components/docs/<slug>.md`: what it does, API tables (configs, methods, events), a Classic example, a Modern example, known limitations.
@@ -60,12 +59,12 @@ Patterns:
 ## 8. Finish
 1. Mark the phase `done` in `ROADMAP.md` and record any decisions later phases need in its Notes section.
 2. Summarize what was built, files touched, and anything deferred.
-3. Propose a commit message (`feat(<slug>): ...`). Commit only when the user says so. Suggest merging the branch into `main` after their review.
+3. Send a final action request with the git commands for the user to run: `git add .`, `git commit -m "feat(<slug>): ..."`, `git push -u origin phase/NN-slug`, and a suggestion to open a pull request into `main`.
 
 ## Definition of done
 - [ ] Works in both test apps with the same public API.
 - [ ] Shared logic lives in `src/` and runs in both toolkits.
 - [ ] Ext JS methods used throughout; native exceptions commented.
-- [ ] Development builds of both apps succeed.
+- [ ] User confirmed clean development builds of both apps.
 - [ ] User confirmed the manual test checklist in both apps.
 - [ ] Docs page, CHANGELOG, version bump, ROADMAP updated.

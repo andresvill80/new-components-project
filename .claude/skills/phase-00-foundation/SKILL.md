@@ -14,14 +14,14 @@ Goal: an empty but correctly wired package that both test apps load, a demo shel
 - Folder contents of `new-components/`, `classic/`, `modern/`.
 - Each app's `app.json` (name, namespace, toolkit, theme, requires) and `workspace.json` (frameworks, packages dirs).
 - The Ext JS version each app uses (look for the version in the app's `ext/` folder, e.g. `ext/package.json` or `ext/version.properties`).
-- Sencha Cmd version: `sencha which`.
+- Sencha Cmd version and git state: send an action request for `sencha which` and `git status` (repo root) and ask for the output.
 Summarize findings and the plan below, then wait for approval.
 
 ## 2. Create the package (the user runs the command)
-If `new-components/package.json` doesn't exist, ask the user to generate it. Cmd generates packages inside a workspace's `packages/local/`, so suggest:
-1. In `classic/`: `sencha generate package new-components` (if the syntax differs, check `sencha help generate package`).
+If `new-components/package.json` doesn't exist, send an action request. Cmd generates packages inside a workspace's `packages/local/`, so ask the user to:
+1. In `classic/`: run `sencha generate package new-components` (if the syntax is rejected, run `sencha help generate package` and paste the output).
 2. Move the generated `classic/packages/local/new-components/` contents into the repo's `new-components/` folder.
-Wait for the user to confirm.
+Wait for the user to confirm, then read the generated files.
 
 ## 3. Configure `new-components/package.json`
 Edit what Cmd generated rather than replacing it. Ensure:
@@ -49,7 +49,7 @@ new-components/
 ## 5. Wire the package into both apps
 - In each `workspace.json`, add the repo root to the package search path so Cmd finds `new-components` (e.g. append `${workspace.dir}/..` to `packages.dir`). The folder name must equal the package name.
 - In each `app.json`, add `"new-components"` to `requires`.
-- Run `sencha app refresh` in each app and confirm the package resolves.
+- Send an action request for `sencha app refresh` in `classic/` and `modern/`, and confirm from the pasted output that the package resolves.
 - If Cmd won't resolve it that way, propose a fallback to the user (for example a Windows directory junction from `<app>/packages/local/new-components` to the repo folder: `mklink /J`), and record the choice in `ROADMAP.md` Notes.
 
 ## 6. Demo shell in each app
@@ -63,9 +63,9 @@ Same structure in both apps, built with MVVM (view / ViewController / ViewModel)
 Adding a demo later must only require: a demo view class, an entry in the demo store, and nothing else.
 
 ## 7. Verify and finish
-- `sencha app refresh` and `sencha app build development` in both apps succeed.
-- User runs `sencha app watch` in each and confirms the shell loads and navigation/routing work.
+- Action request: `sencha app refresh` and `sencha app build development` in both apps; the pasted output shows no errors.
+- Action request: `sencha app watch` in each app; the user confirms the shell loads and navigation/routing work.
 - `new-components/README.md` explains for teammates: where to put the package, `workspace.json` path, `app.json` requires, supported toolkits and themes.
-- Update `ROADMAP.md`, propose commit `chore: package foundation and demo shells`.
+- Update `ROADMAP.md`, then send the final git action request with commit message `chore: package foundation and demo shells`.
 
 Extra instructions from the user: $ARGUMENTS
