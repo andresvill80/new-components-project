@@ -1,0 +1,25 @@
+# Sencha Cmd output
+build/
+bootstrap.js
+bootstrap.json
+bootstrap.css
+*.jsonp
+.sass-cache/
+
+# Ext JS SDK copies inside the test apps (not committed; see README)
+/classic/ext/
+/modern/ext/
+
+# Dependencies
+node_modules/
+
+# Claude Code personal settings
+.claude/settings.local.json
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp

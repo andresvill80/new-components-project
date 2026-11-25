@@ -1,0 +1,19 @@
+* text=auto
+
+*.js    text
+*.json  text
+*.scss  text
+*.html  text
+*.md    text
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+*.png   binary
+*.jpg   binary
+*.gif   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.pkg   binary

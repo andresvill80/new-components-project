@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="MyApp" default=".help"
+         xmlns:if="ant:if"
+         xmlns:unless="ant:unless">
+
+    <!--
+    Find and load Sencha Cmd ant tasks.
+
+    This bootstrap is pure Ant so that it works on Java 15+ where the Nashorn
+    JavaScript engine is no longer available to plain "ant" invocations.
+
+    When this file is run via "sencha ant ..." or "sencha app build", Sencha
+    Cmd provides the "cmd.dir" property and all of the probing below is
+    skipped. It can also be supplied explicitly with -Dcmd.dir=... .
+    -->
+    <property environment="env"/>
+
+    <tempfile property="cmd.which.properties"
+              destdir="${java.io.tmpdir}"
+              prefix="sencha-which-" suffix=".properties"
+              deleteonexit="true"/>
+
+    <!-- Ask the "sencha" command on the PATH where Sencha Cmd is installed -->
+    <condition property="cmd.probe.path.unix" value="true"
+               else="sencha which -p=cmd.dir -o='${cmd.which.properties}'">
+        <isset property="cmd.dir"/>
+    </condition>
+    <exec executable="/bin/sh" dir="${basedir}" osfamily="unix"
+          failifexecutionfails="false">
+        <arg value="-c"/>
+        <arg value="${cmd.probe.path.unix}"/>
+    </exec>
+    <condition property="cmd.probe.path.win" value="rem"
+               else="sencha which -p=cmd.dir -o=${cmd.which.properties}">
+        <isset property="cmd.dir"/>
+    </condition>
+    <exec executable="cmd.exe" dir="${basedir}" osfamily="windows"
+          failifexecutionfails="false">
+        <arg value="/c"/>
+        <arg value="${cmd.probe.path.win}"/>
+    </exec>
+    <property file="${cmd.which.properties}"/>
+
+    <!-- Fall back to the SENCHA_CMD environment variable -->
+    <condition property="cmd.probe.env.unix"
+               value="&quot;${env.SENCHA_CMD}/sencha&quot; which -p=cmd.dir -o='${cmd.which.properties}'"
+               else="true">
+        <and>
+            <not><isset property="cmd.dir"/></not>
+            <isset property="env.SENCHA_CMD"/>
+        </and>
+    </condition>
+    <exec executable="/bin/sh" dir="${basedir}" osfamily="unix"
+          failifexecutionfails="false">
+        <arg value="-c"/>
+        <arg value="${cmd.probe.env.unix}"/>
+    </exec>
+    <condition property="cmd.probe.env.win"
+               value="&quot;${env.SENCHA_CMD}\sencha&quot; which -p=cmd.dir -o=${cmd.which.properties}"
+               else="rem">
+        <and>
+            <not><isset property="cmd.dir"/></not>
+            <isset property="env.SENCHA_CMD"/>
+        </and>
+    </condition>
+    <exec executable="cmd.exe" dir="${basedir}" osfamily="windows"
+          failifexecutionfails="false">
+        <arg value="/c"/>
+        <arg value="${cmd.probe.env.win}"/>
+    </exec>
+    <property file="${cmd.which.properties}"/>
+
+    <!--
+    == Mac OSX launchd fix ==
+    IDEs launched from Finder do not inherit the user's shell PATH, so retry
+    "sencha which" through a login shell profile.
+    -->
+    <condition property="cmd.probe.profile.unix" value="true"
+               else="source ~/.bash_profile; sencha which -p=cmd.dir -o='${cmd.which.properties}'">
+        <isset property="cmd.dir"/>
+    </condition>
+    <exec executable="/bin/sh" osfamily="unix"
+          failifexecutionfails="false">
+        <arg value="-c"/>
+        <arg value="${cmd.probe.profile.unix}"/>
+    </exec>
+    <property file="${cmd.which.properties}"/>
+    <delete file="${cmd.which.properties}" quiet="true"/>
+
+    <fail unless="cmd.dir">Unable to locate Sencha Cmd. Ensure the "sencha" command is on your PATH, or set the SENCHA_CMD environment variable, or pass -Dcmd.dir=/path/to/Sencha/Cmd/x.y.z</fail>
+
+    <property name="build-impl.dir"
+              value="${cmd.dir}/ant/build/app/build-impl.xml"/>
+    <import file="${build-impl.dir}"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+
+        The "page" target performs the call to Sencha Cmd to build the 'all-classes.js' file.
+
+            <target name="-before-page"/>
+            <target name="-after-page"/>
+
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+
+</project>

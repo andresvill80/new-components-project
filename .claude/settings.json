@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sencha app refresh)",
+      "Bash(sencha app build development)",
+      "Bash(sencha which)",
+      "Bash(sencha help *)",
+      "Bash(git status)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch)",
+      "Bash(git branch *)"
+    ],
+    "deny": [
+      "Bash(sencha generate *)",
+      "Bash(sencha app watch)",
+      "Bash(sencha app watch *)",
+      "Bash(git push *)"
+    ]
+  }
+}
