@@ -8,6 +8,9 @@ Ext.define('MyApp.Application', {
 
     name: 'MyApp',
 
+    // Opened when the URL has no hash.
+    defaultToken: 'home',
+
     quickTips: false,
     platformConfig: {
         desktop: {

@@ -10,6 +10,10 @@ bootstrap.css
 /classic/ext/
 /modern/ext/
 
+# Junctions to the package inside the test apps (created locally; see new-components/Readme.md)
+/classic/packages/
+/modern/packages/
+
 # Dependencies
 node_modules/
 
