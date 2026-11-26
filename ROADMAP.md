@@ -26,5 +26,5 @@ Status values: `not started` · `in progress` · `done`
 Record decisions that affect later phases here (naming changes, discovered SDK limitations, shared utilities added).
 
 - **Phase 00, package resolution:** adding the repo root to `packages.dir` makes Cmd find the package, but `sencha app watch` only serves the app folder, so files under `../new-components` return 404 in the browser. Decision: each test app uses a Windows directory junction `<app>/packages/local/new-components` -> repo `new-components/` (`New-Item -ItemType Junction`). `packages.dir` stays at the Cmd default. The junction folders are git-ignored; every teammate creates them once (see `new-components/Readme.md`).
-- **Phase 00, SDK version:** the test apps use Ext JS 8.1.0.13 (not 8.0.0 as in CLAUDE.md); API checks were made against the app `ext/` copies.
+- **Phase 00, SDK version:** the test apps use Ext JS 8.1.0.13; `CLAUDE.md` now says so, and API checks are made against the app `ext/` copies.
 - **Phase 00, demo shell:** both apps keep the name `MyApp`. A demo is added by writing its view class and setting its `viewXtype` in `app/store/Demos.js`. `MyApp.view.demo.EventLog.log(name, args)` prints to the event log.

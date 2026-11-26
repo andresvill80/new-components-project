@@ -21,8 +21,8 @@ A Sencha Cmd package of custom Ext JS 8 components that work in both the **Class
 | xtype / alias prefix | `nc-` (`xtype: 'nc-avatar'`, `alias: 'plugin.nc-skeleton'`) |
 | CSS class prefix | `nc-` |
 | SASS variable prefix | `$nc-` |
-| Ext JS version | 8.0.0 |
-| SDK location | `D:\Aumenta\Sencha\ext\ext-8.0.0\` (each test app may also hold a copy in its `ext/` folder) |
+| Ext JS version | 8.1.0.13 |
+| SDK location | each test app's `ext/` folder (`classic/ext/`, `modern/ext/`, version 8.1.0.13); check APIs there. `D:\Aumenta\Sencha\ext\ext-8.0.0\` is an older copy |
 
 ## Rules that always apply
 1. **Ext JS first.** Use Ext JS classes and methods whenever they exist. Native JavaScript or DOM APIs only when Ext JS has no equivalent, and then with a `// native: <reason>` comment. The `extjs` skill has the details.
