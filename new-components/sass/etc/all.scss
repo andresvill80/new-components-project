@@ -1,0 +1,20 @@
+// Shared SASS globals for the new-components package (prefix: $nc-).
+// Every variable uses !default so apps and themes can override it.
+
+// Base spacing unit; components use multiples of it.
+$nc-spacing: 8px !default;
+
+// Default corner radius.
+$nc-radius: 4px !default;
+
+// Default transition duration.
+$nc-transition-duration: 200ms !default;
+
+// Status colors shared by components (avatar badges, timeline, kanban, ...).
+$nc-status-colors: (
+    'success': #2e7d32,
+    'warning': #ed6c02,
+    'danger': #d32f2f,
+    'info': #0288d1,
+    'neutral': #757575
+) !default;
