@@ -16,7 +16,7 @@ Ext.define('MyApp.store.Demos', {
         { slug: 'avatar', title: 'Avatar / Avatar Group', phase: '01', viewXtype: 'demo-avatar' },
         { slug: 'skeleton', title: 'Skeleton Loader', phase: '02', viewXtype: 'demo-skeleton' },
         { slug: 'stepper', title: 'Stepper / Wizard', phase: '03', viewXtype: 'demo-stepper' },
-        { slug: 'otp-field', title: 'OTP / PIN Field', phase: '04', viewXtype: '' },
+        { slug: 'otp-field', title: 'OTP / PIN Field', phase: '04', viewXtype: 'demo-otp' },
         { slug: 'date-range-field', title: 'Date Range Field', phase: '05', viewXtype: '' },
         { slug: 'tree-picker', title: 'Tree Picker Field', phase: '06', viewXtype: '' },
         { slug: 'timeline', title: 'Timeline', phase: '07', viewXtype: '' },

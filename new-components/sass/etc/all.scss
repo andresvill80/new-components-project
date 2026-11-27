@@ -102,3 +102,27 @@ $nc-stepper-vertical-width: 240px !default;
 
 // Focus ring of a step button.
 $nc-stepper-focus-color: #1565c0 !default;
+
+// ---------------------------------------------------------------------------
+// OTP field
+// ---------------------------------------------------------------------------
+
+// Size of one box and the gap between boxes.
+$nc-otp-box-width: 44px !default;
+$nc-otp-box-height: 52px !default;
+$nc-otp-gap: 8px !default;
+$nc-otp-font-size: 22px !default;
+
+// Border, text and background of a box; the border of the focused and the invalid box.
+$nc-otp-border-color: #8a9099 !default;
+$nc-otp-color: #202124 !default;
+$nc-otp-background: #fff !default;
+$nc-otp-focus-color: #1565c0 !default;
+$nc-otp-invalid-color: #c62828 !default;
+
+// A disabled or read-only box.
+$nc-otp-locked-background: #f1f3f4 !default;
+
+// The visual separator between two groups of boxes.
+$nc-otp-separator-width: 12px !default;
+$nc-otp-separator-color: #5f6368 !default;
