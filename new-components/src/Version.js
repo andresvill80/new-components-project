@@ -9,5 +9,5 @@ Ext.define('NC.Version', {
      * @property {String} version
      * Keep in sync with `version` in package.json.
      */
-    version: '0.2.0'
+    version: '0.3.0'
 });

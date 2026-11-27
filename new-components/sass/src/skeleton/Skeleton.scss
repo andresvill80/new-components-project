@@ -1,0 +1,149 @@
+// Styles of NC.skeleton.Skeleton and of the overlay of NC.skeleton.SkeletonPlugin. Shared by
+// both toolkits: they render the same markup (see NC.skeleton.SkeletonTpl).
+//
+//   .nc-skeleton (or .nc-skeleton-overlay)     container
+//     .nc-skeleton-item                        every grey block
+//       .nc-skeleton-text | -circle | -rect
+//     .nc-skeleton-row, -col, -cell, -card, -form-row    layout of the presets
+//
+// The shimmer is a soft light band that crosses each block, drawn by :after, so it needs no
+// gradient. `.nc-skeleton-animated` on the container turns it on.
+
+.nc-skeleton {
+    display: block;
+    box-sizing: border-box;
+
+    &.nc-skeleton-shape-circle {
+        width: $nc-skeleton-circle-size;
+        height: $nc-skeleton-circle-size;
+    }
+
+    &.nc-skeleton-shape-rect {
+        width: 100%;
+        height: $nc-skeleton-rect-height;
+    }
+}
+
+.nc-skeleton-item {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: $nc-skeleton-color;
+}
+
+.nc-skeleton-text {
+    height: $nc-skeleton-text-height;
+    margin-bottom: $nc-skeleton-gap;
+    border-radius: 4px;
+}
+
+.nc-skeleton-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.nc-skeleton-rect {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+// Presets.
+.nc-skeleton-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+}
+
+.nc-skeleton-col {
+    flex: 1;
+    min-width: 0;
+    margin-left: 12px;
+
+    .nc-skeleton-text:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.nc-skeleton-list-row .nc-skeleton-circle {
+    flex: none;
+    width: $nc-skeleton-circle-size;
+    height: $nc-skeleton-circle-size;
+}
+
+.nc-skeleton-cell {
+    flex: 1;
+    min-width: 0;
+    padding-right: 16px;
+
+    .nc-skeleton-text {
+        margin-bottom: 0;
+    }
+}
+
+.nc-skeleton-card {
+    padding: 16px;
+
+    .nc-skeleton-card-image {
+        height: $nc-skeleton-card-image-height;
+        margin-bottom: 12px;
+    }
+}
+
+.nc-skeleton-form-row {
+    padding: 8px 16px;
+
+    .nc-skeleton-input {
+        height: $nc-skeleton-input-height;
+    }
+}
+
+// The overlay of the plugin: covers the body area of its host.
+.nc-skeleton-host {
+    position: relative;
+}
+
+.nc-skeleton-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    overflow: hidden;
+    background-color: $nc-skeleton-overlay-background;
+}
+
+// The shimmer.
+.nc-skeleton-animated .nc-skeleton-item:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40%;
+    width: 30%;
+    background-color: $nc-skeleton-highlight;
+    box-shadow: 0 0 24px 24px $nc-skeleton-highlight;
+    opacity: 0.7;
+    transform: skewX(-20deg);
+    animation: nc-skeleton-shimmer $nc-skeleton-shimmer-duration ease-in-out infinite;
+}
+
+@keyframes nc-skeleton-shimmer {
+    0% {
+        transform: translateX(0) skewX(-20deg);
+    }
+
+    100% {
+        transform: translateX(480%) skewX(-20deg);
+    }
+}
+
+// No motion for users who ask for less of it: the blocks stay still and plain.
+@media (prefers-reduced-motion: reduce) {
+    .nc-skeleton-animated .nc-skeleton-item:after {
+        display: none;
+        animation: none;
+    }
+}
