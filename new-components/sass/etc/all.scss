@@ -126,3 +126,30 @@ $nc-otp-locked-background: #f1f3f4 !default;
 // The visual separator between two groups of boxes.
 $nc-otp-separator-width: 12px !default;
 $nc-otp-separator-color: #5f6368 !default;
+
+// ---------------------------------------------------------------------------
+// Date range field and range calendar
+// ---------------------------------------------------------------------------
+
+// Size of a day; a month is seven days wide. Width of the column of presets and the gap
+// between the months.
+$nc-daterange-day-size: 36px !default;
+$nc-daterange-presets-width: 140px !default;
+$nc-daterange-gap: 16px !default;
+
+// Background and text of the calendar, and the secondary text (weekdays) and a day that
+// cannot be picked.
+$nc-daterange-background: #fff !default;
+$nc-daterange-color: #202124 !default;
+$nc-daterange-muted-color: #5f6368 !default;
+$nc-daterange-disabled-color: #9aa0a6 !default;
+
+// The first and last day of the range (white text on it), the days between, and a day under
+// the pointer.
+$nc-daterange-accent-color: #1565c0 !default;
+$nc-daterange-range-background: #e3f2fd !default;
+$nc-daterange-hover-background: #f1f3f4 !default;
+
+// Line between the presets and the months, and the focus ring.
+$nc-daterange-border-color: #c8ccd0 !default;
+$nc-daterange-focus-color: #1565c0 !default;

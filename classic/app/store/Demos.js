@@ -17,7 +17,7 @@ Ext.define('MyApp.store.Demos', {
         { slug: 'skeleton', title: 'Skeleton Loader', phase: '02', viewXtype: 'demo-skeleton' },
         { slug: 'stepper', title: 'Stepper / Wizard', phase: '03', viewXtype: 'demo-stepper' },
         { slug: 'otp-field', title: 'OTP / PIN Field', phase: '04', viewXtype: 'demo-otp' },
-        { slug: 'date-range-field', title: 'Date Range Field', phase: '05', viewXtype: '' },
+        { slug: 'date-range-field', title: 'Date Range Field', phase: '05', viewXtype: 'demo-daterange' },
         { slug: 'tree-picker', title: 'Tree Picker Field', phase: '06', viewXtype: '' },
         { slug: 'timeline', title: 'Timeline', phase: '07', viewXtype: '' },
         { slug: 'dual-list', title: 'Dual List Selector', phase: '08', viewXtype: '' },
