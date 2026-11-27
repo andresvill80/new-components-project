@@ -9,7 +9,7 @@ Status values: `not started` · `in progress` · `done`
 | 00 | Foundation: package, wiring, demo shells | `/phase-00-foundation` | `phase/00-foundation` | done |
 | 01 | Avatar / Avatar Group | `/phase-01-avatar` | `phase/01-avatar` | done |
 | 02 | Skeleton Loader | `/phase-02-skeleton` | `phase/02-skeleton` | done |
-| 03 | Stepper / Wizard | `/phase-03-stepper` | `phase/03-stepper` | not started |
+| 03 | Stepper / Wizard | `/phase-03-stepper` | `phase/03-stepper` | done |
 | 04 | OTP / PIN Field | `/phase-04-otp-field` | `phase/04-otp-field` | not started |
 | 05 | Date Range Field | `/phase-05-date-range-field` | `phase/05-date-range-field` | not started |
 | 06 | Tree Picker Field | `/phase-06-tree-picker` | `phase/06-tree-picker` | not started |
@@ -38,5 +38,10 @@ Record decisions that affect later phases here (naming changes, discovered SDK l
 - **Phase 02, listeners on stores that live in a view model:** string method names in a store's `listeners` resolve against the view's controller, not the store, and throw (aborting `load()`). Use function references (they run with the store as scope), or pass an explicit `scope` object.
 - **Phase 02, stores load asynchronously:** `store.load()` fires `beforeload` in a later tick, so `isLoading()` right after `load()` can still be false. `load` also fires on failure with `successful: false`.
 - **Phase 02, demo helpers:** `MyApp.proxy.Slow` (alias `proxy.slow`: Ajax proxy with `delay` and `failNext`), `MyApp.store.People` (alias `store.people`, logs load events to the event log) and `resources/data/people.json` exist in both apps for any later demo that needs a slow or failing load.
+- **Phase 03, pattern:** `NC.stepper.StepperMixin` holds the step logic (Classic `Ext.panel.Panel` and Modern `Ext.Panel` differ); the toolkit `Stepper` adds the card layout, docked indicator and nav toolbar. `StepIndicatorBase` is shared, toolkit classes only supply the root element.
+- **Phase 03, names:** methods are `nextStep()`/`previousStep()` because Classic `Ext.Component` has `next()`/`prev()` (aliases of nextSibling/previousSibling). The indicator uses `orientation`, the stepper `indicatorPosition`.
+- **Phase 03, config pitfalls:** a `null` default config does not go through its applier (use `Ext.Array.from(getX())`). Setters run during construction, so guard refreshes with a ready flag, and in Classic `items` is still a plain array until `initComponent` finishes.
+- **Phase 03, refused changes:** an applier that returns `undefined` cancels the change; call `publishState('activeStep', oldValue)` so a two-way binding gets the real value back.
+- **Phase 03, Classic grid columns:** a string `renderer` is a method name on the controller/scope; use `formatter: 'htmlEncode'` for Ext.util.Format.
 - **Phase 02, SASS (Fashion):** the shimmer is a `:after` band moved with `@keyframes` and `transform`, no gradient needed; `@keyframes`, `transform: translateX() skewX()` and `@media (prefers-reduced-motion: reduce)` compile.
 - **Phase 01, demos:** sample pictures are in `<app>/resources/avatars/`; avatar demo CSS is in `app/view/demo/AvatarDemo.scss` (`.demo-section`, `.demo-item`), reusable by later demos.

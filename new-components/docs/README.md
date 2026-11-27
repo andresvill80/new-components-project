@@ -6,3 +6,4 @@ One page per component, added as each phase finishes.
 |---|---|
 | Avatar / Avatar Group | [avatar.md](avatar.md) |
 | Skeleton Loader | [skeleton.md](skeleton.md) |
+| Stepper / Wizard | [stepper.md](stepper.md) |

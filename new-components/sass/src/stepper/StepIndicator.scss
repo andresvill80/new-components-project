@@ -1,0 +1,185 @@
+// Styles of NC.stepper.StepIndicator. Shared by both toolkits: they render the same markup.
+//
+//   .nc-stepindicator                       root (.nc-stepindicator-vertical / -compact)
+//     ol.nc-step-list
+//       li.nc-step                          + nc-step-active / -complete / -error / -optional
+//         button.nc-step-btn
+//           span.nc-step-marker             number, icon, check (CSS) or "!"
+//           span.nc-step-text
+//             .nc-step-title, -desc, -note  note: "Optional" or the error message
+//         span.nc-step-connector            line to the next step
+
+.nc-stepindicator {
+    display: block;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.nc-step-list {
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nc-step {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-width: 0;
+
+    &:last-child {
+        flex: 0 0 auto;
+
+        .nc-step-connector {
+            display: none;
+        }
+    }
+}
+
+.nc-step-btn {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    margin: 0;
+    padding: 4px;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &:disabled {
+        color: inherit;
+        cursor: default;
+    }
+
+    &:focus {
+        outline: 2px solid $nc-stepper-focus-color;
+        outline-offset: 2px;
+    }
+}
+
+.nc-step-marker {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $nc-stepper-marker-size;
+    height: $nc-stepper-marker-size;
+    border-radius: 50%;
+    background-color: $nc-stepper-upcoming-color;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.nc-step-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-left: 8px;
+}
+
+.nc-step-title {
+    font-weight: 600;
+}
+
+.nc-step-desc,
+.nc-step-note {
+    color: $nc-stepper-muted-color;
+    font-size: 12px;
+}
+
+.nc-step-connector {
+    flex: 1 1 auto;
+    min-width: 16px;
+    height: $nc-stepper-connector-height;
+    margin: 0 8px;
+    background-color: $nc-stepper-connector-color;
+}
+
+// States.
+.nc-step-active .nc-step-marker {
+    background-color: $nc-stepper-active-color;
+}
+
+// A complete step shows a check mark drawn with borders, so no icon font is needed.
+.nc-step-complete {
+    .nc-step-marker {
+        background-color: $nc-stepper-complete-color;
+
+        &:after {
+            content: '';
+            width: 5px;
+            height: 10px;
+            margin-top: -2px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+
+    .nc-step-connector {
+        background-color: $nc-stepper-complete-color;
+    }
+}
+
+.nc-step-error {
+    .nc-step-marker {
+        background-color: $nc-stepper-error-color;
+    }
+
+    .nc-step-note {
+        color: $nc-stepper-error-color;
+    }
+}
+
+// A column of steps (indicatorPosition: 'left').
+.nc-stepindicator-vertical {
+    width: $nc-stepper-vertical-width;
+
+    .nc-step-list {
+        flex-direction: column;
+    }
+
+    .nc-step {
+        flex: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .nc-step-connector {
+        flex: none;
+        width: $nc-stepper-connector-height;
+        min-width: 0;
+        height: 20px;
+        margin: 2px 0 2px ($nc-stepper-marker-size / 2 + 3px);
+    }
+}
+
+// Narrow rows keep the numbers and the title of the active step only.
+.nc-stepindicator-compact {
+    .nc-step:not(.nc-step-active) .nc-step-text,
+    .nc-step-desc {
+        display: none;
+    }
+
+    .nc-step-connector {
+        min-width: 8px;
+        margin: 0 4px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .nc-step-marker,
+    .nc-step-connector {
+        transition: background-color $nc-transition-duration;
+    }
+}
