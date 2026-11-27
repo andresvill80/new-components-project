@@ -1,0 +1,66 @@
+// Styles of NC.otp.OtpField. Shared by both toolkits: they render the same boxes.
+//
+//   .nc-otp-boxes                       row of boxes (+ .nc-otp-locked when disabled / read only)
+//     input.nc-otp-box                  one character
+//     span.nc-otp-sep                   visual separator (after `separatorAfter` boxes)
+//
+// An invalid field shows red boxes: Classic marks the hidden input before the row with
+// .x-form-invalid-field, Modern puts .x-invalid on the field.
+
+.nc-otp-boxes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nc-otp-box {
+    box-sizing: border-box;
+    width: $nc-otp-box-width;
+    height: $nc-otp-box-height;
+    margin: 0 $nc-otp-gap 0 0;
+    padding: 0;
+    border: 1px solid $nc-otp-border-color;
+    border-radius: $nc-radius;
+    background: $nc-otp-background;
+    color: $nc-otp-color;
+    font-size: $nc-otp-font-size;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+
+    &:focus {
+        outline: 2px solid $nc-otp-focus-color;
+        outline-offset: 0;
+        border-color: $nc-otp-focus-color;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background: $nc-otp-locked-background;
+    }
+}
+
+// The separator sits between two boxes, so it takes the place of one gap.
+.nc-otp-sep {
+    display: inline-block;
+    flex: none;
+    width: $nc-otp-separator-width;
+    height: 2px;
+    margin: 0 $nc-otp-gap 0 0;
+    background: $nc-otp-separator-color;
+}
+
+.nc-otp-locked .nc-otp-box:disabled {
+    opacity: 0.6;
+}
+
+.x-form-invalid-field + .nc-otp-boxes .nc-otp-box,
+.x-invalid .nc-otp-box {
+    border-color: $nc-otp-invalid-color;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .nc-otp-box {
+        transition: border-color $nc-transition-duration;
+    }
+}

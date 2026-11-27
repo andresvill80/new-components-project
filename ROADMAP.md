@@ -10,7 +10,7 @@ Status values: `not started` · `in progress` · `done`
 | 01 | Avatar / Avatar Group | `/phase-01-avatar` | `phase/01-avatar` | done |
 | 02 | Skeleton Loader | `/phase-02-skeleton` | `phase/02-skeleton` | done |
 | 03 | Stepper / Wizard | `/phase-03-stepper` | `phase/03-stepper` | done |
-| 04 | OTP / PIN Field | `/phase-04-otp-field` | `phase/04-otp-field` | not started |
+| 04 | OTP / PIN Field | `/phase-04-otp-field` | `phase/04-otp-field` | done |
 | 05 | Date Range Field | `/phase-05-date-range-field` | `phase/05-date-range-field` | not started |
 | 06 | Tree Picker Field | `/phase-06-tree-picker` | `phase/06-tree-picker` | not started |
 | 07 | Timeline | `/phase-07-timeline` | `phase/07-timeline` | not started |
@@ -43,5 +43,8 @@ Record decisions that affect later phases here (naming changes, discovered SDK l
 - **Phase 03, config pitfalls:** a `null` default config does not go through its applier (use `Ext.Array.from(getX())`). Setters run during construction, so guard refreshes with a ready flag, and in Classic `items` is still a plain array until `initComponent` finishes.
 - **Phase 03, refused changes:** an applier that returns `undefined` cancels the change; call `publishState('activeStep', oldValue)` so a two-way binding gets the real value back.
 - **Phase 03, Classic grid columns:** a string `renderer` is a method name on the controller/scope; use `formatter: 'htmlEncode'` for Ext.util.Format.
+- **Phase 04, form field pattern:** `NC.otp.OtpFieldMixin` holds the shared logic (boxes, keys, paste, `complete`) and each toolkit field supplies the plumbing. Classic extends `Ext.form.field.Base` with a hidden `inputEl` that holds the value (so `getRawValue`/`setRawValue`, form submit and dirty tracking work) plus a div of boxes; Modern extends `Ext.field.Field` with `getBodyTemplate()` and overrides `applyValue`/`updateValue`/`doValidate`.
+- **Phase 04, Classic privates:** `getFocusEl` is private in `Ext.form.field.Base`; a public method with the same name raises "Public method conflicts with private framework method". Override it inside `privates: {}`. `Ext.form.field.Base` has no `allowBlank`/`blankText` (those are in `Ext.form.field.Text`), so the field declares its own and overrides `getErrors`.
+- **Phase 04, Modern fields:** `Ext.field.Field` has no `readOnly` config (declare it), a field with several inputs needs `ariaEl`/`focusEl` pointing to a reference, and `clear()` must also empty the boxes itself, because the value setter does not update when the value did not change.
 - **Phase 02, SASS (Fashion):** the shimmer is a `:after` band moved with `@keyframes` and `transform`, no gradient needed; `@keyframes`, `transform: translateX() skewX()` and `@media (prefers-reduced-motion: reduce)` compile.
 - **Phase 01, demos:** sample pictures are in `<app>/resources/avatars/`; avatar demo CSS is in `app/view/demo/AvatarDemo.scss` (`.demo-section`, `.demo-item`), reusable by later demos.

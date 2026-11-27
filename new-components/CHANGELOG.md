@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0
+- OTP / PIN Field: `nc-otpfield` form field with one box per character (numeric or alphanumeric, masked, separator), automatic advance, paste distribution, keyboard navigation and a `complete` event, for Classic and Modern. `NC.otp.OtpUtil` holds the shared character handling.
+
 ## 0.4.0
 - Stepper / Wizard: `nc-stepper` (card layout of steps with Back / Next, form validation, linear rule, bindable `activeStep`) and `nc-stepindicator` (the step header, keyboard accessible, compact when narrow), for Classic and Modern.
 
