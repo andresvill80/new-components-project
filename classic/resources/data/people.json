@@ -1,0 +1,16 @@
+{
+    "people": [
+        { "id": 1, "name": "Ana Ruiz", "email": "ana.ruiz@example.com", "city": "Guadalajara" },
+        { "id": 2, "name": "Juan Pérez", "email": "juan.perez@example.com", "city": "Monterrey" },
+        { "id": 3, "name": "María José López", "email": "mj.lopez@example.com", "city": "Puebla" },
+        { "id": 4, "name": "Luis Gómez", "email": "luis.gomez@example.com", "city": "Mérida" },
+        { "id": 5, "name": "Zoë Smith", "email": "zoe.smith@example.com", "city": "Querétaro" },
+        { "id": 6, "name": "Carlos Díaz", "email": "carlos.diaz@example.com", "city": "León" },
+        { "id": 7, "name": "Marta Ruiz", "email": "marta.ruiz@example.com", "city": "Toluca" },
+        { "id": 8, "name": "Pablo León", "email": "pablo.leon@example.com", "city": "Oaxaca" },
+        { "id": 9, "name": "Inés Vega", "email": "ines.vega@example.com", "city": "Veracruz" },
+        { "id": 10, "name": "Raúl Soto", "email": "raul.soto@example.com", "city": "Tijuana" },
+        { "id": 11, "name": "Elena Cruz", "email": "elena.cruz@example.com", "city": "Cancún" },
+        { "id": 12, "name": "Hugo Paz", "email": "hugo.paz@example.com", "city": "Morelia" }
+    ]
+}

@@ -55,3 +55,27 @@ $nc-avatar-overlap-ratio: 0.25 !default;
 $nc-avatar-color: #fff !default;
 $nc-avatar-ring-color: #fff !default;
 $nc-avatar-focus-color: #1565c0 !default;
+
+// ---------------------------------------------------------------------------
+// Skeleton
+// ---------------------------------------------------------------------------
+
+// Color of the placeholder shapes and of the shimmer that sweeps over them.
+$nc-skeleton-color: #e3e6ea !default;
+$nc-skeleton-highlight: #f6f7f9 !default;
+
+// Background of the overlay that covers a grid, list or form (should match the host's).
+$nc-skeleton-overlay-background: #fff !default;
+
+// Height of one line of text and its gap, of the form fields and of the card pictures.
+$nc-skeleton-text-height: 12px !default;
+$nc-skeleton-gap: 8px !default;
+$nc-skeleton-input-height: 32px !default;
+$nc-skeleton-card-image-height: 140px !default;
+
+// Default size of a standalone circle and rect.
+$nc-skeleton-circle-size: 40px !default;
+$nc-skeleton-rect-height: 120px !default;
+
+// Duration of one sweep of the shimmer.
+$nc-skeleton-shimmer-duration: 1.4s !default;

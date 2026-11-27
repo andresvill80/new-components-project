@@ -1,0 +1,21 @@
+// Layout of the skeleton demo.
+.skeleton-demo-section {
+    margin-bottom: 16px;
+}
+
+// Standalone skeletons sit in a row (more specific than .nc-skeleton { display: block }).
+.skeleton-demo-item.nc-skeleton {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 24px 12px 0;
+}
+
+.skeleton-demo-preset {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    margin: 0 16px 16px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+}
