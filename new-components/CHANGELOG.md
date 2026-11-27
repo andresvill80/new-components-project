@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0
+- Stepper / Wizard: `nc-stepper` (card layout of steps with Back / Next, form validation, linear rule, bindable `activeStep`) and `nc-stepindicator` (the step header, keyboard accessible, compact when narrow), for Classic and Modern.
+
 ## 0.3.0
 - Skeleton Loader: `nc-skeleton` widget (text, circle, rect and list / card / form / table presets) and the `nc-skeleton` plugin that covers a grid, list or form while its store loads, for Classic and Modern.
 

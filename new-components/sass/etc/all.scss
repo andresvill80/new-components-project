@@ -79,3 +79,26 @@ $nc-skeleton-rect-height: 120px !default;
 
 // Duration of one sweep of the shimmer.
 $nc-skeleton-shimmer-duration: 1.4s !default;
+
+// ---------------------------------------------------------------------------
+// Stepper
+// ---------------------------------------------------------------------------
+
+// Marker colors: upcoming, active, complete, error. White text must stay readable on them.
+$nc-stepper-upcoming-color: #757575 !default;
+$nc-stepper-active-color: #1565c0 !default;
+$nc-stepper-complete-color: #2e7d32 !default;
+$nc-stepper-error-color: #c62828 !default;
+
+// Color of the line between steps, and of the secondary text (description, optional label).
+$nc-stepper-connector-color: #c8ccd0 !default;
+$nc-stepper-muted-color: #5f6368 !default;
+
+$nc-stepper-marker-size: 28px !default;
+$nc-stepper-connector-height: 2px !default;
+
+// Width of a vertical (left) indicator.
+$nc-stepper-vertical-width: 240px !default;
+
+// Focus ring of a step button.
+$nc-stepper-focus-color: #1565c0 !default;

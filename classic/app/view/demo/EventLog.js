@@ -52,17 +52,17 @@ Ext.define('MyApp.view.demo.EventLog', {
             text: 'Time',
             dataIndex: 'time',
             width: 110,
-            renderer: 'htmlEncode'
+            formatter: 'htmlEncode'
         }, {
             text: 'Event',
             dataIndex: 'event',
             width: 160,
-            renderer: 'htmlEncode'
+            formatter: 'htmlEncode'
         }, {
             text: 'Arguments',
             dataIndex: 'args',
             flex: 1,
-            renderer: 'htmlEncode'
+            formatter: 'htmlEncode'
         }]
     }],
 
