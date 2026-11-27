@@ -4,4 +4,4 @@ One page per component, added as each phase finishes.
 
 | Component | Page |
 |---|---|
-| _none yet_ | |
+| Avatar / Avatar Group | [avatar.md](avatar.md) |

@@ -18,3 +18,40 @@ $nc-status-colors: (
     'info': #0288d1,
     'neutral': #757575
 ) !default;
+
+// ---------------------------------------------------------------------------
+// Avatar
+// ---------------------------------------------------------------------------
+
+// Background colors of the avatar (white text, contrast of at least 4.5:1). The avatar picks
+// one from the name. Keep the number of entries equal to NC.avatar.AvatarUtil.paletteSize.
+$nc-avatar-palette: (
+    #1565c0,
+    #2e7d32,
+    #c62828,
+    #6a1b9a,
+    #00695c,
+    #ad1457,
+    #b45309,
+    #455a64
+) !default;
+
+$nc-avatar-size-small: 24px !default;
+$nc-avatar-size-medium: 40px !default;
+$nc-avatar-size-large: 64px !default;
+
+// Share of the avatar size used for the initials' font size.
+$nc-avatar-font-ratio: 0.4 !default;
+
+// Status dot size as a share of the avatar size, and its ring around it.
+$nc-avatar-status-ratio: 0.3 !default;
+$nc-avatar-status-ring: 2px !default;
+$nc-avatar-status-min: 8px !default;
+
+// Overlap of grouped avatars as a share of the avatar size.
+$nc-avatar-overlap-ratio: 0.25 !default;
+
+// Text color and ring color (the page background) of avatars.
+$nc-avatar-color: #fff !default;
+$nc-avatar-ring-color: #fff !default;
+$nc-avatar-focus-color: #1565c0 !default;

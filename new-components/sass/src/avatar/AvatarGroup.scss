@@ -1,0 +1,21 @@
+// Styles of NC.avatar.AvatarGroup. Shared by both toolkits.
+
+// Overlap is a share of the avatar's own font size (which is a fixed share of its size), so
+// it works for the named sizes and for numeric sizes alike.
+$nc-avatargroup-overlap: $nc-avatar-overlap-ratio / $nc-avatar-font-ratio;
+
+.nc-avatargroup-overlap {
+    .nc-avatar + .nc-avatar {
+        margin-left: $nc-avatargroup-overlap * -1em;
+    }
+
+    // A ring in the page color separates overlapping avatars.
+    .nc-avatar-inner {
+        box-shadow: 0 0 0 $nc-avatar-status-ring $nc-avatar-ring-color;
+    }
+}
+
+// The "+N" bubble.
+.nc-avatar-overflow .nc-avatar-inner {
+    background-color: map-get($nc-status-colors, 'neutral');
+}
