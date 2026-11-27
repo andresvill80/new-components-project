@@ -5,6 +5,7 @@ bootstrap.json
 bootstrap.css
 *.jsonp
 .sass-cache/
+sencha-error-*.log
 
 # Ext JS SDK copies inside the test apps (not committed; see README)
 /classic/ext/
