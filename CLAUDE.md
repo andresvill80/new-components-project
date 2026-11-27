@@ -29,11 +29,13 @@ A Sencha Cmd package of custom Ext JS 8 components that work in both the **Class
 2. **One public API, two toolkits.** Our own configs, methods, and events are identical in Classic and Modern. Inherited framework configs follow each toolkit's conventions (`fieldLabel` in Classic, `label` in Modern).
 3. **Shared code stays shared.** Anything in `new-components/src/` must run in both toolkits. Never reference toolkit-only classes there.
 4. **Never guess an API.** Before using a class, config, method, or event you are not certain exists in Ext JS 8, check the SDK source (grep the SDK folders listed in the `extjs` skill). If it doesn't exist, say so and pick an alternative.
-5. **Never run `git` or `sencha` commands.** The user runs every git and Sencha Cmd command themselves. When one is needed, stop and send an action request (format below), then wait for the user's reply before continuing.
+5. **Running commands.** Ordinary, safe commands (reading, searching, listing, small local helpers) can be run without asking. Ask for confirmation first, naming the exact command and waiting for a yes, for: any `git` command, any `sencha` command, and anything risky (deleting or overwriting data, anything hard to undo). Never run `sencha app watch`: the user runs it themselves, so tell them when to start or restart it.
 6. **Plan before code.** At the start of every component, present the public API and file list and wait for the user's approval.
 
-## Action requests
-Whenever the user needs to run a command, end your turn with a block in exactly this format, and do nothing else until they answer:
+## Confirmations and action requests
+**Confirmations.** Before a `git` or `sencha` command or a risky command, ask in one short line that names the exact command(s) (for example "May I run `sencha app refresh` and `sencha app build development` in `classic/` and `modern/`?"), then stop and wait. After a yes, run it yourself and read the full output; fix errors before moving on. For git, propose the commit message and ask before committing or pushing.
+
+**Action requests.** Use the block below only for what the user must do themselves: start or restart `sencha app watch`, manual browser tests, or any command you are not allowed to run. End your turn with it, in exactly this format, and do nothing else until they answer:
 
 ```
 🖐 ACTION NEEDED
@@ -45,10 +47,10 @@ Run:
 Then: <what to paste back or confirm, e.g. "paste the full output" or "tell me when it's done">
 ```
 
-- Group everything needed at that point into one request instead of several small ones.
-- After file changes that need a refresh or build, send the request right away rather than continuing on unverified changes.
+- Group everything needed at that point into one request or confirmation instead of several small ones.
+- After file changes that need a refresh or build, ask for confirmation to run it right away rather than continuing on unverified changes.
 - When the user pastes output, read it fully; fix errors before moving on.
-- For git, propose the exact commands and a commit message; the user decides whether to run them.
+- When a phase is ready to test, finish with a numbered checklist: for each step, what to do and what should happen, per toolkit.
 
 ## Skills
 - `extjs` — how to write Ext JS code in this project, for both toolkits. Load it before writing or reviewing any Ext JS code.
@@ -57,7 +59,7 @@ Then: <what to paste back or confirm, e.g. "paste the full output" or "tell me w
 
 If a skill named `extjs-modern` is also available (synced from claude.ai), the project `extjs` skill takes precedence in this repo; its Modern-only rules do not apply to Classic code.
 
-## Which command to request (the user runs them inside `classic/` or `modern/`)
+## Which sencha command to ask to run (inside `classic/` or `modern/`)
 - After adding, renaming, or deleting class files, or changing `requires` / `app.json` / `package.json`: `sencha app refresh`
 - After SASS or theme changes: `sencha app build development`
-- To test in the browser: `sencha app watch` (the user keeps it running while testing)
+- To test in the browser: `sencha app watch` (the user runs it and keeps it running while testing; never run it yourself)

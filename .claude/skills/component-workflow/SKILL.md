@@ -5,11 +5,11 @@ description: The standard procedure and definition of done for building any comp
 
 # Component workflow
 
-Every component follows these steps in order. Load the `extjs` skill first. You never run `git` or `sencha` yourself: every command goes to the user as an action request in the format defined in `CLAUDE.md`, and you wait for their reply.
+Every component follows these steps in order. Load the `extjs` skill first. Command rules (see `CLAUDE.md`, rule 5): safe commands you run yourself; for any `git` command, any `sencha` command or anything risky you first ask for confirmation naming the exact command, then run it after a yes and read the output yourself. You never run `sencha app watch`: tell the user when to start or restart it. Use the 🖐 ACTION NEEDED block only for what the user must do themselves. Whenever you need something from the user, stop and wait.
 
 ## 1. Start
 1. Read `ROADMAP.md`. Confirm earlier phases this one depends on are `done`; if not, tell the user and stop.
-2. Send one action request asking the user to run, at the repo root, `git status` and `git switch -c phase/NN-slug` (or `git switch phase/NN-slug` if the branch exists), and to paste the output. If the tree was dirty, ask how they want to proceed before continuing.
+2. Ask for confirmation to run, at the repo root, `git status` and then `git switch -c phase/NN-slug` (or `git switch phase/NN-slug` if the branch exists). Run `git status` first and read it; if the tree was dirty or you are not on an up-to-date `main`, ask how to proceed before switching.
 3. Mark the phase `in progress` in `ROADMAP.md`.
 
 ## 2. Research (no code yet)
@@ -49,8 +49,8 @@ Patterns:
 
 ## 6. Verify
 1. Re-read your code against the `extjs` skill checklist (section 10).
-2. Send one action request for both apps: `sencha app refresh` then `sencha app build development` in `classic/` and in `modern/`, asking the user to paste the output (or at least every error and warning). Fix what you introduced and repeat until both builds are clean.
-3. Give the user a short **manual test checklist** to follow with `sencha app watch` running in each app. Wait for their results and fix what they report.
+2. Ask for confirmation to run `sencha app refresh` then `sencha app build development` in `classic/` and in `modern/`. After a yes, run them, read the full output, fix what you introduced and repeat (asking again if needed) until both builds are clean.
+3. Tell the user to start (or restart) `sencha app watch` in each app, and give them a **numbered manual test checklist**: for each step, what to do and what should happen, in Classic and in Modern. Wait for their results and fix what they report.
 
 ## 7. Document
 - `new-components/docs/<slug>.md`: what it does, API tables (configs, methods, events), a Classic example, a Modern example, known limitations.
@@ -59,7 +59,7 @@ Patterns:
 ## 8. Finish
 1. Mark the phase `done` in `ROADMAP.md` and record any decisions later phases need in its Notes section.
 2. Summarize what was built, files touched, and anything deferred.
-3. Send a final action request with the git commands for the user to run: `git add .`, `git commit -m "feat(<slug>): ..."`, `git push -u origin phase/NN-slug`, and a suggestion to open a pull request into `main`.
+3. Ask for confirmation to run the git commands: `git status` (check nothing unexpected is listed), `git add .`, `git commit -m "feat(<slug>): ..."` and `git push -u origin phase/NN-slug`. After a yes, run them and read the output. Then suggest opening a pull request into `main`.
 
 ## Definition of done
 - [ ] Works in both test apps with the same public API.
