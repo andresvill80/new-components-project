@@ -1,0 +1,194 @@
+// Styles of NC.avatar.Avatar. Shared by both toolkits: they render the same markup.
+//
+//   .nc-avatar                      root (also carries the size, shape, color and status classes)
+//     .nc-avatar-inner              clipped to the shape; holds the colored background
+//       .nc-avatar-initials
+//       .nc-avatar-img              shown only once it has loaded (.nc-avatar-loaded on root)
+//     .nc-avatar-status             status dot
+
+@mixin nc-avatar-size($size) {
+    width: $size;
+    height: $size;
+    font-size: $size * $nc-avatar-font-ratio;
+}
+
+.nc-avatar {
+    @include nc-avatar-size($nc-avatar-size-medium);
+
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    color: $nc-avatar-color;
+    font-weight: 600;
+    line-height: 1;
+    outline: 0;
+
+    // Sizes. A numeric avatarSize sets width, height and font-size inline instead.
+    &.nc-avatar-small {
+        @include nc-avatar-size($nc-avatar-size-small);
+    }
+
+    &.nc-avatar-medium {
+        @include nc-avatar-size($nc-avatar-size-medium);
+    }
+
+    &.nc-avatar-large {
+        @include nc-avatar-size($nc-avatar-size-large);
+    }
+}
+
+.nc-avatar-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: map-get($nc-status-colors, 'neutral');
+}
+
+.nc-avatar-initials {
+    display: block;
+    white-space: nowrap;
+}
+
+.nc-avatar-img {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// Show the picture only after it loaded, so a slow or broken image leaves the initials.
+.nc-avatar-loaded {
+    .nc-avatar-img {
+        display: block;
+    }
+
+    .nc-avatar-initials {
+        visibility: hidden;
+    }
+}
+
+// Shapes.
+.nc-avatar-circle .nc-avatar-inner {
+    border-radius: 50%;
+}
+
+.nc-avatar-rounded .nc-avatar-inner {
+    border-radius: 25%;
+}
+
+.nc-avatar-square .nc-avatar-inner {
+    border-radius: $nc-radius;
+}
+
+// Colors: one class per palette entry, picked from the name.
+@for $i from 1 through length($nc-avatar-palette) {
+    .nc-avatar-color-#{$i - 1} .nc-avatar-inner {
+        background-color: nth($nc-avatar-palette, $i);
+    }
+}
+
+.nc-avatar-neutral .nc-avatar-inner {
+    background-color: map-get($nc-status-colors, 'neutral');
+}
+
+// No name and no initials: a neutral person silhouette.
+.nc-avatar-empty .nc-avatar-initials {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 22%;
+        left: 50%;
+        width: 34%;
+        height: 34%;
+        margin-left: -17%;
+        border-radius: 50%;
+        background: currentColor;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -14%;
+        left: 50%;
+        width: 70%;
+        height: 50%;
+        margin-left: -35%;
+        border-radius: 50% 50% 0 0;
+        background: currentColor;
+    }
+}
+
+// Status dot, bottom right. Sized as a share of the avatar so it scales with any size.
+.nc-avatar-status {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: $nc-avatar-status-ratio * 100%;
+    height: $nc-avatar-status-ratio * 100%;
+    min-width: $nc-avatar-status-min;
+    min-height: $nc-avatar-status-min;
+    border: $nc-avatar-status-ring solid $nc-avatar-ring-color;
+    border-radius: 50%;
+}
+
+.nc-avatar-status-online,
+.nc-avatar-status-away,
+.nc-avatar-status-busy,
+.nc-avatar-status-offline {
+    .nc-avatar-status {
+        display: block;
+    }
+}
+
+.nc-avatar-status-online .nc-avatar-status {
+    background-color: map-get($nc-status-colors, 'success');
+}
+
+.nc-avatar-status-away .nc-avatar-status {
+    background-color: map-get($nc-status-colors, 'warning');
+}
+
+.nc-avatar-status-busy .nc-avatar-status {
+    background-color: map-get($nc-status-colors, 'danger');
+}
+
+.nc-avatar-status-offline .nc-avatar-status {
+    background-color: map-get($nc-status-colors, 'neutral');
+}
+
+// Selectable avatars act like buttons.
+.nc-avatar-selectable {
+    cursor: pointer;
+
+    &:focus {
+        outline: 2px solid $nc-avatar-focus-color;
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .nc-avatar-selectable .nc-avatar-inner {
+        transition: opacity $nc-transition-duration;
+    }
+}
+
+// Not `filter: brightness()`: Fashion reads brightness() as a Sass color function.
+.nc-avatar-selectable:hover .nc-avatar-inner {
+    opacity: 0.85;
+}

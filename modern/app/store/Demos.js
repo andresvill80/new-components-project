@@ -13,7 +13,7 @@ Ext.define('MyApp.store.Demos', {
 
     data: [
         { slug: 'home', title: 'Home', phase: '00', viewXtype: 'app-home' },
-        { slug: 'avatar', title: 'Avatar / Avatar Group', phase: '01', viewXtype: '' },
+        { slug: 'avatar', title: 'Avatar / Avatar Group', phase: '01', viewXtype: 'demo-avatar' },
         { slug: 'skeleton', title: 'Skeleton Loader', phase: '02', viewXtype: '' },
         { slug: 'stepper', title: 'Stepper / Wizard', phase: '03', viewXtype: '' },
         { slug: 'otp-field', title: 'OTP / PIN Field', phase: '04', viewXtype: '' },
