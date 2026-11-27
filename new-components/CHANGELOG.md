@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.0
+- Date Range Field: `nc-daterangefield` (type or pick a range, presets, min / max, `maxSpan`, one or two submit parameters) and `nc-rangecalendar` (months side by side with keyboard navigation and range preview), for Classic and Modern. `NC.daterange.DateRangeUtil` holds the shared month matrix, range checks, parsing and presets.
+
 ## 0.5.0
 - OTP / PIN Field: `nc-otpfield` form field with one box per character (numeric or alphanumeric, masked, separator), automatic advance, paste distribution, keyboard navigation and a `complete` event, for Classic and Modern. `NC.otp.OtpUtil` holds the shared character handling.
 

@@ -1,0 +1,251 @@
+// Styles of NC.daterange.RangeCalendar and the picker of NC.daterange.DateRangeField. Shared by
+// both toolkits: they render the same markup.
+//
+//   .nc-rangecalendar
+//     .nc-rc-body
+//       .nc-rc-presets              column of buttons (.nc-rc-preset)
+//       .nc-rc-months
+//         .nc-rc-month              one per month shown
+//           .nc-rc-head             .nc-rc-nav (.nc-rc-prev / .nc-rc-next) and .nc-rc-title
+//           table.nc-rc-grid        th = weekdays, td > button.nc-rc-day
+//
+// A day also has .nc-rc-today, -start, -end, -inrange, -pending (the first day picked while the
+// end is being picked), -disabled and, while hovering to pick the end, -preview(-start / -end).
+
+.nc-rangecalendar {
+    display: inline-block;
+    box-sizing: border-box;
+    background: $nc-daterange-background;
+    color: $nc-daterange-color;
+
+    // The root takes the focus while the days are drawn again; it needs no ring.
+    &:focus {
+        outline: 0;
+    }
+}
+
+.nc-rangepicker {
+    background: $nc-daterange-background;
+}
+
+.nc-rc-body {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+}
+
+.nc-rc-presets {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: $nc-daterange-presets-width;
+    margin-right: $nc-daterange-gap;
+    padding-right: $nc-daterange-gap - 4px;
+    border-right: 1px solid $nc-daterange-border-color;
+}
+
+.nc-rc-preset {
+    margin: 0 0 2px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: $nc-radius;
+    background: none;
+    color: $nc-daterange-accent-color;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+        background: $nc-daterange-hover-background;
+    }
+
+    &:focus {
+        outline: 2px solid $nc-daterange-focus-color;
+        outline-offset: 0;
+    }
+
+    &:disabled {
+        background: none;
+        color: $nc-daterange-disabled-color;
+        cursor: default;
+    }
+}
+
+.nc-rc-months {
+    display: flex;
+}
+
+.nc-rc-month {
+    flex: none;
+    width: $nc-daterange-day-size * 7;
+    margin-right: $nc-daterange-gap;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.nc-rc-head {
+    display: flex;
+    align-items: center;
+    height: $nc-daterange-day-size;
+    margin-bottom: 4px;
+}
+
+.nc-rc-title {
+    flex: 1 1 auto;
+    font-weight: 600;
+    text-align: center;
+}
+
+.nc-rc-nav,
+.nc-rc-navspace {
+    flex: none;
+    width: $nc-daterange-day-size;
+    height: $nc-daterange-day-size;
+}
+
+// The arrows are drawn with borders, so no icon font is needed.
+.nc-rc-nav {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+        background: $nc-daterange-hover-background;
+    }
+
+    &:focus {
+        outline: 2px solid $nc-daterange-focus-color;
+        outline-offset: 0;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 7px;
+        height: 7px;
+        margin-top: -5px;
+        border: solid currentColor;
+        border-width: 0 2px 2px 0;
+    }
+}
+
+.nc-rc-prev:after {
+    margin-left: -2px;
+    transform: rotate(135deg);
+}
+
+.nc-rc-next:after {
+    margin-left: -6px;
+    transform: rotate(-45deg);
+}
+
+.nc-rc-grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    th {
+        height: 28px;
+        padding: 0;
+        color: $nc-daterange-muted-color;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    td {
+        height: $nc-daterange-day-size;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+.nc-rc-day {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: $nc-daterange-day-size;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: inset 0 0 0 1px $nc-daterange-accent-color;
+    }
+
+    &:focus {
+        z-index: 1;
+        outline: 2px solid $nc-daterange-focus-color;
+        outline-offset: -2px;
+    }
+}
+
+.nc-rc-today {
+    color: $nc-daterange-accent-color;
+    font-weight: 700;
+}
+
+// The days between the first and the last, and the preview of the range being picked.
+.nc-rc-inrange,
+.nc-rc-preview {
+    background: $nc-daterange-range-background;
+}
+
+// The first and the last day: white on the accent color. The shape makes the band of the range
+// start and end in a rounded cap.
+.nc-rc-start,
+.nc-rc-end,
+.nc-rc-preview-start,
+.nc-rc-preview-end {
+    background: $nc-daterange-accent-color;
+    color: #fff;
+}
+
+.nc-rc-start,
+.nc-rc-preview-start {
+    border-radius: 50% 0 0 50%;
+}
+
+.nc-rc-end,
+.nc-rc-preview-end {
+    border-radius: 0 50% 50% 0;
+}
+
+.nc-rc-start.nc-rc-end,
+.nc-rc-day.nc-rc-pending {
+    border-radius: 50%;
+}
+
+.nc-rc-disabled {
+    color: $nc-daterange-disabled-color;
+    font-weight: normal;
+    cursor: not-allowed;
+
+    &:hover {
+        box-shadow: none;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .nc-rc-day,
+    .nc-rc-preset,
+    .nc-rc-nav {
+        transition: background-color $nc-transition-duration;
+    }
+}
